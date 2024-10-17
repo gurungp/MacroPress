@@ -64,6 +64,10 @@ extern std::vector<AdvancedButtonPress2> seqLD3;
 extern std::vector<AdvancedButtonPress2> seqLD4;
 extern std::vector<AdvancedButtonPress> seqLD5;
 
+// Key sequence for Sniper
+
+extern std::vector<AdvancedButtonPress2> seqSnipe1;
+
 // test New Way of pressing
 extern std::vector<AdvancedButtonPress2> seqTest1;
 extern std::vector<AdvancedButtonPress2> seqTest2;

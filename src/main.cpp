@@ -4,6 +4,7 @@
 #include "InputMonitor.h"
 #include "LegionCommander.h"
 #include "LoneDruid.cpp"
+#include "Sniper.cpp"
 #include "Tusk.h"
 #include "button_key_States.h"
 #include <Carbon/Carbon.h>
@@ -117,7 +118,7 @@ void detectRightDoubleClickandAlt(int timeoutMs) {
 // particular hero this time ArcWarden or LegionCommander only
 // variable name is hero
 CGEventRef (*hero)(const InputMonitor &, const KeyboardMonitor &,
-                   CGEventRef &) = &LoneDruid;
+                   CGEventRef &) = &Sniper;
 
 // Event CallBack Function
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,

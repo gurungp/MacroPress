@@ -44,6 +44,7 @@ CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
   // alt + r
   if (keyStates[kVK_ANSI_R].state && altState) {
 
+    CGEventSetType(event, kCGEventKeyUp); // unpress r first
     std::thread t([] {
       while (altState) { // until alt is released, don't run the sequence
                          // to avoid alt modifier to linger when the sequence of presses

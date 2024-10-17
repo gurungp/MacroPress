@@ -294,3 +294,8 @@ std::vector<AdvancedButtonPress2> seqTest3= {
     //{{20}, {79}, 800, 56},
 };
 
+//-------------Sniper---------------
+std::vector<AdvancedButtonPress2> seqSnipe1= {
+    {{19,1,200}, {}, 140, 55}, // e then s
+};
+
