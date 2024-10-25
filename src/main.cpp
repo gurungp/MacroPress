@@ -118,7 +118,7 @@ void detectRightDoubleClickandAlt(int timeoutMs) {
 // particular hero this time ArcWarden or LegionCommander only
 // variable name is hero
 CGEventRef (*hero)(const InputMonitor &, const KeyboardMonitor &,
-                   CGEventRef &) = &Sniper;
+                   CGEventRef &) = &LoneDruid;
 
 // Event CallBack Function
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,

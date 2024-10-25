@@ -243,9 +243,9 @@ std::vector<AdvancedButtonPress2> seqLD4 = {
  {{23}, {}, 140, 40},  // 5
     {{0,201}, {56}, 300, 40}, // shift + a + left click
 
-    {{1,19}, {56}, 500, 40}, // shift + s + 2
-    {{200},{56},650,40}, // shift + right click
-    {{20}, {}, 790, 40}, // 3
+    {{1,19}, {56}, 450, 40}, // shift + s + 2
+    {{200},{56},600,40}, // shift + right click
+    {{20}, {}, 720, 40}, // 3
 
   //  {23, 79, 140, 50},   // 5
   //  {56, 79, 340, 450},  // shift
@@ -296,6 +296,6 @@ std::vector<AdvancedButtonPress2> seqTest3= {
 
 //-------------Sniper---------------
 std::vector<AdvancedButtonPress2> seqSnipe1= {
-    {{19,1,200}, {}, 140, 55}, // e then s
+    {{14,1,200}, {}, 140, 55}, // e then s
 };
 

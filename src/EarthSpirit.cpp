@@ -28,17 +28,23 @@ CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
 
   // alt + e
   if (keyStates[kVK_ANSI_E].state && keyboardMonitor.isAltKeyPressed()) {
-    // to avoid alt modifier to linger when the sequence of presses
-    // are being executed
 
-    avoidModifierKey(event, kCGEventFlagMaskAlternate); // avoid or unpress
-                                                        // Alt modifier key
-
-    // Similarly to unpress the E or any other key, to not have effect of the
+    // Unpress the E or any other key, to not have effect of the
     // keypresses
     CGEventSetType(event, kCGEventKeyUp);
-    // Press the keys of the sequence, passed
-    runSequence(seqESpirit2);
+
+    // Similarly, to avoid alt modifier to linger when the sequence of presses
+    // are being executed
+
+    std::thread t([] {
+      while (altState) { // until alt is released, don't run the sequence
+      }
+
+      runSequence(seqESpirit2); // fetch the enemy
+    });
+    t.detach();
+
+    return nullptr;
   }
 
   // alt + r

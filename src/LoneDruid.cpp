@@ -14,18 +14,18 @@ CGEventRef LoneDruid(const InputMonitor &inputMonitor, const KeyboardMonitor &ke
                                                                                                                     // alt + right click
 
   // alt + right click
-  if (altState && mouseRightState) {
+  // if (altState && mouseRightState) {
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
+  //   std::thread t([] {
+  //     while (altState) { // until alt is released, don't run the sequence
 
-        std::cout << "Alt and Right Click Pressed" << std::endl;
-      }
-      runSequence2(seqLD1A); // fetch the enemy
-    });
-    t.detach();
-    return nullptr;
-  }
+  //       std::cout << "Alt and Right Click Pressed" << std::endl;
+  //     }
+  //     runSequence2(seqLD1A); // fetch the enemy
+  //   });
+  //   t.detach();
+  //   return nullptr;
+  // }
 
   // both mouse button click
   if (mouseRightState && mouseLeftState) {
@@ -36,20 +36,31 @@ CGEventRef LoneDruid(const InputMonitor &inputMonitor, const KeyboardMonitor &ke
   // alt + w
   if (w_keyState && altState) {
 
+    // to avoid alt modifier to linger when the sequence of presses
+    // are being executed
     std::thread t([] {
       while (altState) { // until alt is released, don't run the sequence
       }
-      runSequence2(seqLD2); // fetch the enemy
+      runSequence2(seqLD4); // fetch the enemy
     });
     t.detach();
     return nullptr;
   }
   // alt + e
   if (keyStates[kVK_ANSI_E].state && keyboardMonitor.isAltKeyPressed()) {
+
+    // Unpress the E or any other key, to not have effect of the
+    // keypresses
+    CGEventSetType(event, kCGEventKeyUp);
+
+    // Similarly, to avoid alt modifier to linger when the sequence of presses
+    // are being executed
+
     std::thread t([] {
       while (altState) { // until alt is released, don't run the sequence
       }
-      runSequence2(seqLD4); // fetch the enemy
+
+      runSequence2(seqLD1A); // fetch the enemy
     });
     t.detach();
     return nullptr;
