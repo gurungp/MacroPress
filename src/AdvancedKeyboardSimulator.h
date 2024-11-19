@@ -225,7 +225,7 @@ public:
       thread.join();
     }
   }
-
+  // OLD VERSION
   static void simulateAdvancedMultiButtonPress(const std::vector<AdvancedButtonPress> &buttonPresses) { // flags are for passing modifiers to be applied, 0
                                                                                                         // for no modifiers
     std::vector<std::thread> threads;

@@ -3,13 +3,24 @@
 #include "button_key_States.h"
 #include <CoreGraphics/CGEventTypes.h>
 #include <CoreGraphics/CGRemoteOperation.h>
-#include <vector>
 
 // key states of modifier keys
 std::unordered_map<CGKeyCode, buttonState> keyStates = {
+
     {kVK_ANSI_W, buttonState()},
+    {kVK_ANSI_Q, buttonState()},
     {kVK_ANSI_E, buttonState()},
     {kVK_ANSI_R, buttonState()},
+    {kVK_ANSI_P, buttonState()},
+    {kVK_ANSI_O, buttonState()},
+    {kVK_ANSI_L, buttonState()},
+    {kVK_ANSI_K, buttonState()},
+    {kVK_ANSI_I, buttonState()},
+    {kVK_ANSI_D, buttonState()},
+    {kVK_ANSI_F, buttonState()},
+    {kVK_ANSI_4, buttonState()},
+    {kVK_ANSI_3, buttonState()},
+
     {kVK_Control, buttonState()},
     {kVK_Option, buttonState()},
 

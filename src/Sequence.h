@@ -68,6 +68,15 @@ extern std::vector<AdvancedButtonPress> seqLD5;
 
 extern std::vector<AdvancedButtonPress2> seqSnipe1;
 
+// Key sequence for QOP
+extern std::vector<AdvancedButtonPress2> seqQOP1;
+extern std::vector<AdvancedButtonPress2> seqQOP2;
+
+
+// Key sequence for Invoker
+extern std::vector<AdvancedButtonPress2> seqInv1;
+extern std::vector<AdvancedButtonPress2> seqInv2;
+
 // test New Way of pressing
 extern std::vector<AdvancedButtonPress2> seqTest1;
 extern std::vector<AdvancedButtonPress2> seqTest2;

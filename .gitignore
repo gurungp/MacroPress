@@ -1,0 +1,7 @@
+build/
+Xcode /
+github token
+.DS_Store
+.cache/
+.clang-format
+

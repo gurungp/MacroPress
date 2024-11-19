@@ -267,7 +267,7 @@ std::vector<AdvancedButtonPress> seqLD5 = {
 };
 
 std::vector<AdvancedButtonPress2> seqTest1= {
-    {{56}, {79}, 140, 320}, // shift
+    {{56}, {79}, 140, 320}, // shift (shift is 56)
     {{1}, {79}, 320, 60},
     // {{56}, {79, 50, 56}, 440, 350},
     // {{19}, {79}, 640, 60},
@@ -296,6 +296,44 @@ std::vector<AdvancedButtonPress2> seqTest3= {
 
 //-------------Sniper---------------
 std::vector<AdvancedButtonPress2> seqSnipe1= {
-    {{14,1,200}, {}, 140, 55}, // e then s
+    {{14,1,200}, {}, 140, 55}, // e then s then right click
+};
+
+
+//-------------QOP---------------
+std::vector<AdvancedButtonPress2> seqQOP1= {
+    {{13}, {}, 140, 55},
+   {{19,12, 14, 1}, {56}, 300, 55}, // (2, q , e , s ) all with shift
+   // {{13,19,12, 14, 1}, {56}, 140, 55}, // w, 2, q , e , s
+};
+
+std::vector<AdvancedButtonPress2> seqQOP2= {
+      {{13,19,3,201,12, 14, 1}, {56}, 140, 55}, // ( w, 2,f,left click, q , e , s ) all with shift
+};
+
+//-------------Invoker---------------
+std::vector<AdvancedButtonPress2> seqInv1 = {
+    {{13},{},140,20},// w  
+    {{13},{},270,20},// w
+    {{14,15},{},370,20},// e, r    
+    {{14},{},490,20},// e 
+    {{12},{},623,20},// q
+    {{15},{},1160,20},// r     
+    //{{14,14,14,12,15},{},900,55}, // e,e,q,r,
+
+};
+
+std::vector<AdvancedButtonPress2> seqInv2 = {
+    {{17},{58},140,20}, // alt + t
+    {{2},{},270,20}, // d
+    {{12},{},370,20},// q
+    {{12},{},470,20},// q
+    {{15},{},580,20},// r     
+    {{2},{},690,20}, // d
+    {{14},{},800,20}, // e
+    {{14},{},915,20}, // e
+    {{13},{},1030,20}, // w
+    {{15},{},1355,20}, // r
+
 };
 

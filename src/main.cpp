@@ -1,11 +1,8 @@
 
-#include "ArcWarden.h"
-#include "EarthSpirit.cpp"
 #include "InputMonitor.h"
-#include "LegionCommander.h"
-#include "LoneDruid.cpp"
-#include "Sniper.cpp"
-#include "Tusk.h"
+// #include "QOP.h" // make sure each corresponding header files has its cpp file added to the CMakeList.txt to make
+// the linker know where the implementation is for heroes or any other header/cpp files
+#include "Invoker.h"
 #include "button_key_States.h"
 #include <Carbon/Carbon.h>
 #include <CoreGraphics/CGEvent.h>
@@ -19,13 +16,16 @@
 #include <ostream>
 #include <thread>
 
+#define UPDATE_KEY_STATE(keyCodeConst, value) \
+  if (keyCode == (keyCodeConst)) {            \
+    keyStates[(keyCodeConst)].state = value;  \
+  }
+
 // Using Threads to detect click Counts
 std::atomic<int> leftclickCount(0);
 std::atomic<int> rightclickCount(0);
-std::atomic<bool> inLeftClickDetection(
-    false); // Flag to ensure only one detection thread runs
-std::atomic<bool> inRightClickDetection(
-    false); // Flag to ensure only one detection thread runs
+std::atomic<bool> inLeftClickDetection(false);  // Flag to ensure only one detection thread runs
+std::atomic<bool> inRightClickDetection(false); // Flag to ensure only one detection thread runs
 std::atomic<bool> left_alt_state = false;
 std::atomic<bool> right_alt_state = false;
 std::atomic<bool> double_leftClick = false;
@@ -118,7 +118,7 @@ void detectRightDoubleClickandAlt(int timeoutMs) {
 // particular hero this time ArcWarden or LegionCommander only
 // variable name is hero
 CGEventRef (*hero)(const InputMonitor &, const KeyboardMonitor &,
-                   CGEventRef &) = &LoneDruid;
+                   CGEventRef &) = &Invoker;
 
 // Event CallBack Function
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
@@ -260,6 +260,10 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
   if (type == kCGEventKeyDown) {
 
     CGKeyCode keyCode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+
+    if (keyCode == kVK_ANSI_Q) {
+      keyStates[kVK_ANSI_Q].state = true;
+    }
     if (keyCode == kVK_ANSI_W) {
       keyStates[kVK_ANSI_W].state = true;
     }
@@ -269,12 +273,26 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     if (keyCode == kVK_ANSI_R) {
       keyStates[kVK_ANSI_R].state = true;
     }
+
+    if (keyCode == kVK_ANSI_P) {
+      keyStates[kVK_ANSI_P].state = true;
+    }
     if (keyCode == kVK_Option) {
       keyStates[kVK_Option].state = true;
     }
     if (keyCode == kVK_Control) {
       keyStates[kVK_Control].state = true;
     }
+    // Macro for the code as above
+    UPDATE_KEY_STATE(kVK_ANSI_O, true);
+    UPDATE_KEY_STATE(kVK_ANSI_K, true);
+    UPDATE_KEY_STATE(kVK_ANSI_I, true);
+    UPDATE_KEY_STATE(kVK_ANSI_L, true);
+    UPDATE_KEY_STATE(kVK_ANSI_D, true);
+    UPDATE_KEY_STATE(kVK_ANSI_F, true);
+    UPDATE_KEY_STATE(kVK_ANSI_0, true);
+    UPDATE_KEY_STATE(kVK_ANSI_3, true);
+    UPDATE_KEY_STATE(kVK_ANSI_4, true);
   }
 
   // KEY UP EVENTS
@@ -285,7 +303,9 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     if (keyCode == kVK_ANSI_W) {
       keyStates[kVK_ANSI_W].state = false;
     }
-
+    if (keyCode == kVK_ANSI_Q) {
+      keyStates[kVK_ANSI_Q].state = false;
+    }
     if (keyCode == kVK_ANSI_E) {
       keyStates[kVK_ANSI_E].state = false;
     }
@@ -293,12 +313,26 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
       keyStates[kVK_ANSI_R].state = false;
     }
 
+    if (keyCode == kVK_ANSI_P) {
+      keyStates[kVK_ANSI_P].state = false;
+    }
     if (keyCode == kVK_Option) {
       keyStates[kVK_Option].state = false;
     }
     if (keyCode == kVK_Control) {
       keyStates[kVK_Control].state = false;
     }
+
+    // Macro for the code as above
+    UPDATE_KEY_STATE(kVK_ANSI_O, false);
+    UPDATE_KEY_STATE(kVK_ANSI_K, false);
+    UPDATE_KEY_STATE(kVK_ANSI_I, false);
+    UPDATE_KEY_STATE(kVK_ANSI_L, false);
+    UPDATE_KEY_STATE(kVK_ANSI_D, false);
+    UPDATE_KEY_STATE(kVK_ANSI_F, false);
+    UPDATE_KEY_STATE(kVK_ANSI_0, false);
+    UPDATE_KEY_STATE(kVK_ANSI_3, false);
+    UPDATE_KEY_STATE(kVK_ANSI_4, false);
   }
 
   // ---------------------------- All the macros defined below
@@ -328,19 +362,16 @@ int main() {
       CGEventMaskBit(kCGEventOtherMouseDown) |
       CGEventMaskBit(kCGEventOtherMouseUp);
 
-  CFMachPortRef eventTap = CGEventTapCreate(
-      kCGHIDEventTap, kCGHeadInsertEventTap, kCGEventTapOptionDefault,
-      eventMask, eventCallback, NULL);
+  CFMachPortRef eventTap = CGEventTapCreate(kCGHIDEventTap, kCGHeadInsertEventTap, kCGEventTapOptionDefault,
+                                            eventMask, eventCallback, NULL);
 
   if (!eventTap) {
     std::cerr << "Failed to create event tap." << std::endl;
     return 1;
   }
 
-  CFRunLoopSourceRef runLoopSource =
-      CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0);
-  CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource,
-                     kCFRunLoopCommonModes);
+  CFRunLoopSourceRef runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0);
+  CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopCommonModes);
   CGEventTapEnable(eventTap, true);
 
   // Enter the run loop
