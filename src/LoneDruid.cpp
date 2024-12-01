@@ -36,6 +36,9 @@ CGEventRef LoneDruid(const InputMonitor &inputMonitor, const KeyboardMonitor &ke
   // alt + w
   if (w_keyState && altState) {
 
+    // Unpress the E or any other key, to not have effect of the
+    // keypresses
+    CGEventSetType(event, kCGEventKeyUp);
     // to avoid alt modifier to linger when the sequence of presses
     // are being executed
     std::thread t([] {

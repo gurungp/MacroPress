@@ -36,25 +36,23 @@ CGEventRef Tusk(const InputMonitor &inputMonitor,
   //
 
   if (keyStates[kVK_ANSI_E].state && keyboardMonitor.isAltKeyPressed()) {
-    // to avoid alt modifier to linger when the sequence of presses
-    // are being executed
-
-    avoidModifierKey(event, kCGEventFlagMaskAlternate); // avoid or unpress
-                                                        // Alt modifier key
-
-    // Similarly to unpress the E or any other key, to not have effect of the
-    // keypresses
+    // Unpress the E or any other key, to not have effect of the keypresses
     CGEventSetType(event, kCGEventKeyUp);
+    std::thread t([] {
+      while (altState) { // until alt is released, don't run the sequence
+      }
+      if (Blink.onCoolDown() or SnowBall.onCoolDown() || WalrusPunch.onCoolDown() or WalrusKick.onCoolDown()) {
+        std::cout << "THE WHOLE SEQUENCE CANNOT RUN BECAUSE ON COOLDOWN" << std::endl;
+        //   IceShard.m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/On Cooldown.mp3");
+      } else {
 
-    if (Blink.onCoolDown() or SnowBall.onCoolDown() || WalrusPunch.onCoolDown() or WalrusKick.onCoolDown()) {
-      std::cout << "THE WHOLE SEQUENCE CANNOT RUN BECAUSE ON COOLDOWN" << std::endl;
-      //   IceShard.m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/On Cooldown.mp3");
-      return nullptr;
-    } else {
+        // Press the keys of the sequence, passed
+        runSequence2(seqTusk1);
+      }
+    });
+    t.detach();
 
-      // Press the keys of the sequence, passed
-      runSequence(seqTusk1);
-    }
+    return nullptr;
   }
   //-----------------------------------------TESTING---------------------------------------
   // Learn and print times

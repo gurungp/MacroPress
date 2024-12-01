@@ -140,7 +140,7 @@ bool Spell::onCoolDown() {
 }
 void Spell::useRefresher() {
 
-  m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Refresher on.mp3");
+  // m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Refresher on.mp3");
   m_lastCastTimePoint = std::chrono::system_clock::time_point{};
   m_lastExpected_CD_FinishTime = std::chrono::system_clock::time_point{};
 }
@@ -154,14 +154,14 @@ void Spell::setOctarine(bool value) {
   // m_spellCDTimes = m_spellCDTimesDefault; // Because talent might have been used which decreases CD
   if (m_octarine) {
 
-    m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Octarine On.mp3");
+    //   m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Octarine On.mp3");
     for (int i = 0; i < m_spellCDTimes.size(); i++) {
       double spell_time = m_spellCDTimes[i];
       m_spellCDTimes[i] = (0.75 * spell_time); // or , m_spellCDTimes[i] = (spell_time) - (0.25 * spell_time);
     }
   } else {
 
-    m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Octarine Off.mp3");
+    //   m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Octarine Off.mp3");
     //    m_spellCDTimes = m_spellCDTimesDefault;
     for (int i = 0; i < m_spellCDTimes.size(); i++) {
       double spell_time = m_spellCDTimes[i];

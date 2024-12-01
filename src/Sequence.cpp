@@ -19,21 +19,21 @@ void avoidModifierKey(CGEventRef &event, CGEventFlags flag) {
   // CFRelease(altKeyUp);
 }
 
-// To the sequence of Key Presses
-void runSequence(const std::vector<AdvancedButtonPress> &sequence) {
-  // Advanced Key Presses
-  //
-  dispatch_async(
-      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AdvancedKeyboardSimulator::simulateAdvancedMultiButtonPress(sequence);
-      });
-}
 void runSequence2(const std::vector<AdvancedButtonPress2> &sequence) {
   // Advanced Key Presses
   //
   dispatch_async(
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AdvancedKeyboardSimulator::simulateAdvancedMultiButtonPress2(sequence);
+      });
+}
+
+void runSequence3(const std::vector<AdvancedButtonPress3> &sequence) {
+  // Advanced Key Presses
+  //
+  dispatch_async(
+      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        AdvancedKeyboardSimulator::simulateAdvancedMultiButtonPress3(sequence);
       });
 }
 // 200 for right click
@@ -55,123 +55,130 @@ std::vector<AdvancedButtonPress2> seqG2 = {
 
 };
 
+// Arc Warden
 // Key sequence 1
 //  Presses q then e, and tab and then q and e again
-std::vector<AdvancedButtonPress> seq1 = {
-    {12, 79, 140, 70},  // the delay 140ms is necessary because the game won't
-                        // register fast key press at the beginning
-    {14, 79, 650, 60},  // e
-    {23, 79, 780, 70},  // 5
-    {12, 79, 900, 60},  // q
-    {14, 79, 1460, 70}, // e
-    {25, 79, 1600, 60}  // 9 // ctrl grp 9
 
+std::vector<AdvancedButtonPress2> seqArc1 = {
+    // Advanced Buttun Press 2 Version
+    {{12}, {}, 140, 70},  // the delay 140ms is necessary because the game won't
+                          // register fast key press at the beginning
+    {{14}, {}, 650, 60},  // e
+    {{23}, {}, 780, 70},  // 5
+    {{12}, {}, 900, 60},  // q
+    {{14}, {}, 1460, 70}, // e
+    {{25}, {}, 1600, 60}  // 9 // ctrl grp 9
 };
 
 // Key sequence 2
 //  Selects main hero and then presses q and e
-std::vector<AdvancedButtonPress> seq2 = {
-    {20, 79, 140, 60}, // 3
-    {12, 79, 290, 55}, // q
-    {14, 79, 750, 53}, // e
-    {25, 79, 1000, 57} // 9
+
+std::vector<AdvancedButtonPress2> seqArc2 = {
+    {{20}, {}, 140, 60}, // 3
+    {{12}, {}, 290, 55}, // q
+    {{14}, {}, 750, 53}, // e
+    {{25}, {}, 1000, 57} // 9
 };
 
 // Key sequence 3
 //  Selects clone and then presses q and e
-std::vector<AdvancedButtonPress> seq3 = {
-    {23, 79, 140, 60}, // 5
-    {12, 79, 290, 55}, // q
-    {14, 79, 750, 53}, // e
-    {25, 79, 1000, 57} // 9
+
+std::vector<AdvancedButtonPress2> seqArc3 = {
+    {{23}, {}, 140, 60}, // 5
+    {{12}, {}, 290, 55}, // q
+    {{14}, {}, 750, 53}, // e
+    {{25}, {}, 1000, 57} // 9
 };
 
 // Key sequence 4
 //  selects main hero and right clicks and select both
-std::vector<AdvancedButtonPress> seq4 = {
-    {20, 79, 140, 60},  // 3
-    {200, 79, 300, 55}, // right click
+
+std::vector<AdvancedButtonPress2> seqArc4 = {
+    {{20}, {}, 140, 60},  // 3
+    {{200}, {}, 300, 55}, // right click
 };
 // selects clone and right clicks and select both
-std::vector<AdvancedButtonPress> seq5 = {
-    {23, 79, 140, 60},  // 5
-    {200, 79, 300, 55}, // right click
+
+std::vector<AdvancedButtonPress2> seqArc5 = {
+    {{23}, {}, 140, 60},  // 5
+    {{200}, {}, 300, 55}, // right click
 };
 
 // select both hero and clone only with ctrl group 9
-std::vector<AdvancedButtonPress> seq6 = {
-    {25, 79, 150, 50} // 9
+
+std::vector<AdvancedButtonPress2> seqArc6 = {
+    {{25}, {}, 150, 50} // 9
 };
 
 //  Presses select clone, press f, press s, press w,
 // select main here, press w , press 2 , select ctrl group 9
 
-std::vector<AdvancedButtonPress> seq7 = {
-    {23, 79, 140, 70},  // 5
-    {3, 79, 250, 55},   // f
-    {201, 79, 420, 60}, // Left Click
-    {1, 79, 660, 70},   // s
-    {58, 79, 0, 0},     // alt
-    {13, 79, 765, 60},  // w
-    {19, 79, 920, 60},  // 2
-    {23, 79, 1080, 70}, // 5
-    {20, 79, 1250, 55}, // 3
-    {58, 79, 0, 0},     // alt
-    {13, 79, 1400, 60}, // w
-    {19, 79, 1580, 60}, // 2
-    {25, 79, 1890, 60}  // 9
+std::vector<AdvancedButtonPress2> seqArc7 = {
+    {{23}, {}, 140, 70},  // 5
+    {{3}, {}, 250, 55},   // f
+    {{201}, {}, 420, 60}, // Left Click
+    {{1}, {}, 660, 70},   // s
+    {{58}, {}, 0, 0},     // alt
+    {{13}, {}, 765, 60},  // w
+    {{19}, {}, 920, 60},  // 2
+    {{23}, {}, 1080, 70}, // 5
+    {{20}, {}, 1250, 55}, // 3
+    {{58}, {}, 0, 0},     // alt
+    {{13}, {}, 1400, 60}, // w
+    {{19}, {}, 1580, 60}, // 2
+    {{25}, {}, 1890, 60}  // 9
 };
 
 // --------------Legion-Commander-----
 std::vector<AdvancedButtonPress2> seqLC1 = {
-    {{13}, {58}, 140, 50},     // alt+w
-    {{3}, {}, 340, 55},   // f
-    {{201},{},520,55}, // left click
-    {{12}, {}, 670, 55},  // q
-    {{0}, {56}, 850, 60},   // shift + a
-    {{4,15},{},1000,60}, // h + r
-                                // h ->hold to stop auto attack before r
+    {{13}, {58}, 140, 50},   // alt+w
+    {{3}, {}, 340, 55},      // f
+    {{201}, {}, 520, 55},    // left click
+    {{12}, {}, 670, 55},     // q
+    {{0}, {56}, 850, 60},    // shift + a
+    {{4, 15}, {}, 1000, 60}, // h + r
+                             // h ->hold to stop auto attack before r
 
 };
 
 std::vector<AdvancedButtonPress2> seqLC3 = {
-    {{13}, {58}, 140, 50},     // alt+w
-    {{3}, {}, 340, 55},   // f
-    {{201},{},520,55}, // left click
-    {{12}, {}, 670, 55},  // q
-    {{0}, {56}, 850, 60},   // shift + a , a=blademill
-    {{4,6,15},{},1000,60}, // h + z + r  , z =bkb
+    {{13}, {58}, 140, 50},      // alt+w
+    {{3}, {}, 340, 55},         // f
+    {{201}, {}, 520, 55},       // left click
+    {{12}, {}, 670, 55},        // q
+    {{0}, {56}, 850, 60},       // shift + a , a=blademill
+    {{4, 6, 15}, {}, 1000, 60}, // h + z + r  , z =bkb
                                 // h ->hold to stop auto attack before r
 
 };
 
 // -------------Tusk---------------------
 
-std::vector<AdvancedButtonPress> seqTusk1 = {
+std::vector<AdvancedButtonPress2> seqTusk1 = {
     // {56, 0, 0},     // shift
-    {3, 79, 140, 55},   // f
-    {201, 79, 240, 60}, // Left Click
-                        //  {56, 0, 0},     // Shift
-    {15, 79, 380, 55},  // r
-                        // {56, 0, 0},     // Shift
-    {13, 79, 500, 60},  // w
-                        // {56, 0, 0},     // shift
-    {2, 79, 600, 1050}, // d
-                        //    {6, 1120, 55},  // z
-                        //   {1, 1300, 60},  // s=1
-                        //    {15, 1490, 54}  // r
+    {{3}, {}, 140, 55},   // f
+    {{201}, {}, 240, 60}, // Left Click
+                          //  {56, 0, 0},     // Shift
+    {{15}, {}, 380, 55},  // r
+                          // {56, 0, 0},     // Shift
+    {{13}, {}, 500, 60},  // w
+                          // {56, 0, 0},     // shift
+    {{2}, {}, 600, 1050}, // d
+                          //    {6, 1120, 55},  // z
+                          //   {1, 1300, 60},  // s=1
+                          //    {15, 1490, 54}  // r
 
 };
 
 //--------------Earth-Spirit------------------
 std::vector<AdvancedButtonPress2> seqESpirit1 = {
 
-    {{3,201}, {}, 140, 55},   // f + left click
-    {{12}, {56}, 300, 560}, // q
+    {{3, 201}, {}, 140, 55}, // f + left click
+    {{12}, {56}, 300, 560},  // q
 
     {{13}, {}, 1000, 60}, // w
-    {{2}, {},1200,55}, // d
-  //  {2, 79, 1380, 50},  // d
+    {{2}, {}, 1200, 55},  // d
+                          //  {2, 79, 1380, 50},  // d
 
     //    {6, 1120, 55},  // z
     //   {1, 1300, 60},  // s=1
@@ -179,94 +186,84 @@ std::vector<AdvancedButtonPress2> seqESpirit1 = {
 
 };
 
-std::vector<AdvancedButtonPress> seqESpirit2 = {
+std::vector<AdvancedButtonPress2> seqESpirit2 = {
     // {56,100,55}, // shift
-    {2, 79, 150, 55},  // d
-    {14, 79, 350, 60}, // e
-    {13, 79, 580, 50}, // w
+    {{2}, {}, 150, 55},  // d
+    {{14}, {}, 350, 60}, // e
+    {{13}, {}, 580, 50}, // w
     //{56,780,49}, // Shift
-    {12, 79, 850, 900}, // q
-                        //    {56,1580,0}, // Shift
-                        //    {0,1595,50}, // a (bkb)
-                        //
-                        //    {6, 1120, 55},  // z
-                        //   {1, 1300, 60},  // s=1
-                        //    {15, 1490, 54}  // r
+    {{12}, {}, 850, 900}, // q
+                          //    {56,1580,0}, // Shift
+                          //    {0,1595,50}, // a (bkb)
+                          //
+                          //    {6, 1120, 55},  // z
+                          //   {1, 1300, 60},  // s=1
+                          //    {15, 1490, 54}  // r
 
 };
 
 std::vector<AdvancedButtonPress2> seqESpirit3 = {
-      {{3,201}, {}, 140, 55},   // f + left click
-    {{17},{},300,40}, // t for scepter
-    {{12}, {56}, 400, 560}, //  q 
-    {{13}, {}, 1090, 60}, // w
-    {{2}, {},1200,55}, // d
-
+    {{3, 201}, {}, 140, 55}, // f + left click
+    {{17}, {}, 300, 40},     // t for scepter
+    {{12}, {56}, 400, 560},  //  q
+    {{13}, {}, 1090, 60},    // w
+    {{2}, {}, 1200, 55},     // d
 
 };
-
 
 //---------------Lone-Druid------------------
 
 std::vector<AdvancedButtonPress2> seqLD1A = {
-    {{23,17}, {}, 140, 40}, // 5 + t
-    {{20}, {}, 250, 40},  // 3
+    {{23, 17}, {}, 140, 40}, // 5 + t
+    {{20}, {}, 250, 40},     // 3
 
 };
 
 std::vector<AdvancedButtonPress2> seqLD1B = {
-    {{23}, {}, 140, 50}, // 5
-    {{19},{58},290,65}, // alt + 2 , self force staff
-    {{20}, {}, 550, 56},  // 3
+    {{23}, {}, 140, 50},   // 5
+    {{19}, {58}, 290, 65}, // alt + 2 , self force staff
+    {{20}, {}, 550, 56},   // 3
 
 };
 
 std::vector<AdvancedButtonPress2> seqLD2 = {
     // Consider extra 20ms addition per modifier or key
     // 10ms for clicks
-    {{23}, {}, 140, 40},  // 5
-    {{0,201}, {56}, 300, 40}, // shift + a + left click
+    {{23}, {}, 140, 40},       // 5
+    {{0, 201}, {56}, 300, 40}, // shift + a + left click
 
-    {{1,200}, {56}, 500, 40}, // shift + s + right click
-    {{20}, {}, 690, 40}, // 3
+    {{1, 200}, {56}, 500, 40}, // shift + s + right click
+    {{20}, {}, 690, 40},       // 3
 
 };
 
 std::vector<AdvancedButtonPress2> seqLD3 = {
-     {{25}, {}, 140, 50}, // 9
-  //  {0, 56, 140, 60}, // A
+    {{25}, {}, 140, 50}, // 9
+                         //  {0, 56, 140, 60}, // A
 };
 
 std::vector<AdvancedButtonPress2> seqLD4 = {
 
+    {{23}, {}, 140, 40},       // 5
+    {{0, 201}, {56}, 300, 40}, // shift + a + left click
 
- {{23}, {}, 140, 40},  // 5
-    {{0,201}, {56}, 300, 40}, // shift + a + left click
+    {{1, 19}, {56}, 450, 40}, // shift + s + 2
+    {{200}, {56}, 600, 40},   // shift + right click
+    {{20}, {}, 720, 40},      // 3
 
-    {{1,19}, {56}, 450, 40}, // shift + s + 2
-    {{200},{56},600,40}, // shift + right click
-    {{20}, {}, 720, 40}, // 3
-
-  //  {23, 79, 140, 50},   // 5
-  //  {56, 79, 340, 450},  // shift
-//    {0, 79, 540, 50},    // a
- //   {201, 79, 720, 50},  // left click
- //   {56, 79, 920, 320},  // shift
-//    {1, 79, 1150, 60},   // s
- //   {56, 79, 1350, 280}, // shift
- //   {19, 79, 1550, 65},  // 2
- //   {20, 79, 1750, 56},  // 3
-
-};
-
-std::vector<AdvancedButtonPress> seqLD5 = {
-    {23, 79, 140, 50},  // 5
-    {200, 79, 240, 60}, // right click
-    {20, 79, 370, 50},  // 3
+    //  {23, 79, 140, 50},   // 5
+    //  {56, 79, 340, 450},  // shift
+    //    {0, 79, 540, 50},    // a
+    //   {201, 79, 720, 50},  // left click
+    //   {56, 79, 920, 320},  // shift
+    //    {1, 79, 1150, 60},   // s
+    //   {56, 79, 1350, 280}, // shift
+    //   {19, 79, 1550, 65},  // 2
+    //   {20, 79, 1750, 56},  // 3
 
 };
 
-std::vector<AdvancedButtonPress2> seqTest1= {
+std::vector<AdvancedButtonPress2> seqTest1 = {
     {{56}, {79}, 140, 320}, // shift (shift is 56)
     {{1}, {79}, 320, 60},
     // {{56}, {79, 50, 56}, 440, 350},
@@ -274,66 +271,38 @@ std::vector<AdvancedButtonPress2> seqTest1= {
     //{{20}, {79}, 800, 56},
 };
 
-std::vector<AdvancedButtonPress2> seqTest2= {
-    {{23}, {}, 140, 55}, // 5  , empty brackest mean no modifier key set
-    {{0,201}, {56}, 280, 60}, // shift + a + left-click
-    {{1},{56},390,59}, // shift + s
-    {{19},{56},550,55}, // shift + 2
-    {{20},{},640,56},  
+std::vector<AdvancedButtonPress2> seqTest2 = {
+    {{23}, {}, 140, 55},       // 5  , empty brackest mean no modifier key set
+    {{0, 201}, {56}, 280, 60}, // shift + a + left-click
+    {{1}, {56}, 390, 59},      // shift + s
+    {{19}, {56}, 550, 55},     // shift + 2
+    {{20}, {}, 640, 56},
     // {{56}, {79, 50, 56}, 440, 350},
     // {{19}, {79}, 640, 60},
     //{{20}, {79}, 800, 56},
 };
 
-std::vector<AdvancedButtonPress2> seqTest3= {
-    {{23}, {}, 140, 55}, // 5  , empty brackest mean no modifier key set
-    {{0,201,1,19}, {56}, 300, 60}, // shift + a + left-click + s + 2
-    {{20},{},750,56}, // 3 
-    // {{56}, {79, 50, 56}, 440, 350},
-    // {{19}, {79}, 640, 60},
-    //{{20}, {79}, 800, 56},
+std::vector<AdvancedButtonPress2> seqTest3 = {
+    {{23}, {}, 140, 55},              // 5  , empty brackest mean no modifier key set
+    {{0, 201, 1, 19}, {56}, 300, 60}, // shift + a + left-click + s + 2
+    {{20}, {}, 750, 56},              // 3
+                                      // {{56}, {79, 50, 56}, 440, 350},
+                                      // {{19}, {79}, 640, 60},
+                                      //{{20}, {79}, 800, 56},
 };
 
 //-------------Sniper---------------
-std::vector<AdvancedButtonPress2> seqSnipe1= {
-    {{14,1,200}, {}, 140, 55}, // e then s then right click
+std::vector<AdvancedButtonPress2> seqSnipe1 = {
+    {{14, 1, 200}, {}, 140, 55}, // e then s then right click
 };
-
 
 //-------------QOP---------------
-std::vector<AdvancedButtonPress2> seqQOP1= {
+std::vector<AdvancedButtonPress2> seqQOP1 = {
     {{13}, {}, 140, 55},
-   {{19,12, 14, 1}, {56}, 300, 55}, // (2, q , e , s ) all with shift
-   // {{13,19,12, 14, 1}, {56}, 140, 55}, // w, 2, q , e , s
+    {{19, 12, 14, 1}, {56}, 300, 55}, // (2, q , e , s ) all with shift
+                                      // {{13,19,12, 14, 1}, {56}, 140, 55}, // w, 2, q , e , s
 };
 
-std::vector<AdvancedButtonPress2> seqQOP2= {
-      {{13,19,3,201,12, 14, 1}, {56}, 140, 55}, // ( w, 2,f,left click, q , e , s ) all with shift
+std::vector<AdvancedButtonPress2> seqQOP2 = {
+    {{13, 19, 3, 201, 12, 14, 1}, {56}, 140, 55}, // ( w, 2,f,left click, q , e , s ) all with shift
 };
-
-//-------------Invoker---------------
-std::vector<AdvancedButtonPress2> seqInv1 = {
-    {{13},{},140,20},// w  
-    {{13},{},270,20},// w
-    {{14,15},{},370,20},// e, r    
-    {{14},{},490,20},// e 
-    {{12},{},623,20},// q
-    {{15},{},1160,20},// r     
-    //{{14,14,14,12,15},{},900,55}, // e,e,q,r,
-
-};
-
-std::vector<AdvancedButtonPress2> seqInv2 = {
-    {{17},{58},140,20}, // alt + t
-    {{2},{},270,20}, // d
-    {{12},{},370,20},// q
-    {{12},{},470,20},// q
-    {{15},{},580,20},// r     
-    {{2},{},690,20}, // d
-    {{14},{},800,20}, // e
-    {{14},{},915,20}, // e
-    {{13},{},1030,20}, // w
-    {{15},{},1355,20}, // r
-
-};
-

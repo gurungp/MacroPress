@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 
-template <typename T> class Queue {
+template <typename T>
+class Queue {
 public:
   Queue(int s) : size(s), arr(new T[s]) {
     // std::cout << "Queue constructor called " << std::endl;
@@ -64,6 +65,10 @@ public:
     count++;
     if (count >= size + 1)
       count = size;
+  }
+
+  bool full() {
+    return count >= size;
   }
 
   T dequeue() {

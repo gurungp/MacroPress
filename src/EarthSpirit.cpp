@@ -29,8 +29,7 @@ CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
   // alt + e
   if (keyStates[kVK_ANSI_E].state && keyboardMonitor.isAltKeyPressed()) {
 
-    // Unpress the E or any other key, to not have effect of the
-    // keypresses
+    // Unpress the E or any other key, to not have effect of the keypresses
     CGEventSetType(event, kCGEventKeyUp);
 
     // Similarly, to avoid alt modifier to linger when the sequence of presses
@@ -40,7 +39,7 @@ CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
       while (altState) { // until alt is released, don't run the sequence
       }
 
-      runSequence(seqESpirit2); // fetch the enemy
+      runSequence2(seqESpirit2); // fetch the enemy
     });
     t.detach();
 

@@ -181,16 +181,16 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     mouseStates[kCGEventOtherMouseDown].state = true;
     mouseStates[kCGEventOtherMouseUp].state = false;
     if (button == 2) {
-      std::cout << "Middle Mouse Button Clicked " << std::endl;
+      //   std::cout << "Middle Mouse Button Clicked " << std::endl;
 
     } else if (button == 3) {
 
-      std::cout << "Back Mouse Button Clicked " << std::endl;
+      //  std::cout << "Back Mouse Button Clicked " << std::endl;
     } else if (button == 4) {
 
-      std::cout << "Forward Mouse Button Clicked " << std::endl;
+      //  std::cout << "Forward Mouse Button Clicked " << std::endl;
     } else {
-      std::cout << "Other Mouse Button Clicked " << std::endl;
+      //  std::cout << "Other Mouse Button Clicked " << std::endl;
     }
   }
   if (type == kCGEventOtherMouseUp) {
@@ -289,10 +289,13 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     UPDATE_KEY_STATE(kVK_ANSI_I, true);
     UPDATE_KEY_STATE(kVK_ANSI_L, true);
     UPDATE_KEY_STATE(kVK_ANSI_D, true);
+    UPDATE_KEY_STATE(kVK_ANSI_T, true);
     UPDATE_KEY_STATE(kVK_ANSI_F, true);
     UPDATE_KEY_STATE(kVK_ANSI_0, true);
     UPDATE_KEY_STATE(kVK_ANSI_3, true);
     UPDATE_KEY_STATE(kVK_ANSI_4, true);
+    UPDATE_KEY_STATE(kVK_ANSI_X, true);
+    UPDATE_KEY_STATE(kVK_ANSI_C, true);
   }
 
   // KEY UP EVENTS
@@ -329,10 +332,13 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     UPDATE_KEY_STATE(kVK_ANSI_I, false);
     UPDATE_KEY_STATE(kVK_ANSI_L, false);
     UPDATE_KEY_STATE(kVK_ANSI_D, false);
+    UPDATE_KEY_STATE(kVK_ANSI_T, false);
     UPDATE_KEY_STATE(kVK_ANSI_F, false);
     UPDATE_KEY_STATE(kVK_ANSI_0, false);
     UPDATE_KEY_STATE(kVK_ANSI_3, false);
     UPDATE_KEY_STATE(kVK_ANSI_4, false);
+    UPDATE_KEY_STATE(kVK_ANSI_X, false);
+    UPDATE_KEY_STATE(kVK_ANSI_C, false);
   }
 
   // ---------------------------- All the macros defined below

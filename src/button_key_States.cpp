@@ -17,9 +17,12 @@ std::unordered_map<CGKeyCode, buttonState> keyStates = {
     {kVK_ANSI_K, buttonState()},
     {kVK_ANSI_I, buttonState()},
     {kVK_ANSI_D, buttonState()},
+    {kVK_ANSI_T, buttonState()},
     {kVK_ANSI_F, buttonState()},
     {kVK_ANSI_4, buttonState()},
     {kVK_ANSI_3, buttonState()},
+    {kVK_ANSI_X, buttonState()},
+    {kVK_ANSI_C, buttonState()},
 
     {kVK_Control, buttonState()},
     {kVK_Option, buttonState()},
