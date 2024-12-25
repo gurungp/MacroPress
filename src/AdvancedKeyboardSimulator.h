@@ -198,8 +198,8 @@ public:
             }
           }
 
-          for (CGEventRef event : eventsDown) {
-          }
+          //   for (CGEventRef event : eventsDown) {
+          //  }
 
           // Wait for specified time
           std::this_thread::sleep_for(std::chrono::milliseconds(press.WaitAfterPressDuration));

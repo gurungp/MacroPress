@@ -2,7 +2,7 @@
 #include "InputMonitor.h"
 // #include "QOP.h" // make sure each corresponding header files has its cpp file added to the CMakeList.txt to make
 // the linker know where the implementation is for heroes or any other header/cpp files
-#include "Invoker.h"
+#include "QOP.h"
 #include "button_key_States.h"
 #include <Carbon/Carbon.h>
 #include <CoreGraphics/CGEvent.h>
@@ -30,6 +30,8 @@ std::atomic<bool> left_alt_state = false;
 std::atomic<bool> right_alt_state = false;
 std::atomic<bool> double_leftClick = false;
 std::atomic<bool> double_rightClick = false;
+// extern bool rearming; // for Tinker only
+
 // Keyboard and Mouse Monitor to monitor key/button presses through IOKIT/Carbon
 KeyboardMonitor keyboardMonitor;
 InputMonitor inputMonitor;
@@ -118,7 +120,7 @@ void detectRightDoubleClickandAlt(int timeoutMs) {
 // particular hero this time ArcWarden or LegionCommander only
 // variable name is hero
 CGEventRef (*hero)(const InputMonitor &, const KeyboardMonitor &,
-                   CGEventRef &) = &Invoker;
+                   CGEventRef &) = &QueenOfPain;
 
 // Event CallBack Function
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
@@ -160,7 +162,11 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     mouseStates[kCGEventLeftMouseDown].state = true;
   }
   if (type == kCGEventRightMouseDown) {
-
+    //-For-Tinker-only------
+    // if (rearming) {
+    //  return nullptr;
+    //}
+    //--------------
     mouseStates[kCGEventRightMouseUp].state = false;
     mouseStates[kCGEventRightMouseDown].state = true;
   }
@@ -294,8 +300,15 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     UPDATE_KEY_STATE(kVK_ANSI_0, true);
     UPDATE_KEY_STATE(kVK_ANSI_3, true);
     UPDATE_KEY_STATE(kVK_ANSI_4, true);
+    UPDATE_KEY_STATE(kVK_ANSI_5, true);
+    UPDATE_KEY_STATE(kVK_ANSI_6, true);
+    UPDATE_KEY_STATE(kVK_ANSI_7, true);
+    UPDATE_KEY_STATE(kVK_ANSI_8, true);
+    UPDATE_KEY_STATE(kVK_ANSI_9, true);
     UPDATE_KEY_STATE(kVK_ANSI_X, true);
     UPDATE_KEY_STATE(kVK_ANSI_C, true);
+    UPDATE_KEY_STATE(kVK_ANSI_Semicolon, true);
+    UPDATE_KEY_STATE(kVK_ANSI_V, true);
   }
 
   // KEY UP EVENTS
@@ -337,8 +350,15 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     UPDATE_KEY_STATE(kVK_ANSI_0, false);
     UPDATE_KEY_STATE(kVK_ANSI_3, false);
     UPDATE_KEY_STATE(kVK_ANSI_4, false);
+    UPDATE_KEY_STATE(kVK_ANSI_5, false);
+    UPDATE_KEY_STATE(kVK_ANSI_6, false);
+    UPDATE_KEY_STATE(kVK_ANSI_7, false);
+    UPDATE_KEY_STATE(kVK_ANSI_8, false);
+    UPDATE_KEY_STATE(kVK_ANSI_9, false);
     UPDATE_KEY_STATE(kVK_ANSI_X, false);
     UPDATE_KEY_STATE(kVK_ANSI_C, false);
+    UPDATE_KEY_STATE(kVK_ANSI_Semicolon, false);
+    UPDATE_KEY_STATE(kVK_ANSI_V, false);
   }
 
   // ---------------------------- All the macros defined below

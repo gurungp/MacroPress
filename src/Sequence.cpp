@@ -170,98 +170,6 @@ std::vector<AdvancedButtonPress2> seqTusk1 = {
 
 };
 
-//--------------Earth-Spirit------------------
-std::vector<AdvancedButtonPress2> seqESpirit1 = {
-
-    {{3, 201}, {}, 140, 55}, // f + left click
-    {{12}, {56}, 300, 560},  // q
-
-    {{13}, {}, 1000, 60}, // w
-    {{2}, {}, 1200, 55},  // d
-                          //  {2, 79, 1380, 50},  // d
-
-    //    {6, 1120, 55},  // z
-    //   {1, 1300, 60},  // s=1
-    //    {15, 1490, 54}  // r
-
-};
-
-std::vector<AdvancedButtonPress2> seqESpirit2 = {
-    // {56,100,55}, // shift
-    {{2}, {}, 150, 55},  // d
-    {{14}, {}, 350, 60}, // e
-    {{13}, {}, 580, 50}, // w
-    //{56,780,49}, // Shift
-    {{12}, {}, 850, 900}, // q
-                          //    {56,1580,0}, // Shift
-                          //    {0,1595,50}, // a (bkb)
-                          //
-                          //    {6, 1120, 55},  // z
-                          //   {1, 1300, 60},  // s=1
-                          //    {15, 1490, 54}  // r
-
-};
-
-std::vector<AdvancedButtonPress2> seqESpirit3 = {
-    {{3, 201}, {}, 140, 55}, // f + left click
-    {{17}, {}, 300, 40},     // t for scepter
-    {{12}, {56}, 400, 560},  //  q
-    {{13}, {}, 1090, 60},    // w
-    {{2}, {}, 1200, 55},     // d
-
-};
-
-//---------------Lone-Druid------------------
-
-std::vector<AdvancedButtonPress2> seqLD1A = {
-    {{23, 17}, {}, 140, 40}, // 5 + t
-    {{20}, {}, 250, 40},     // 3
-
-};
-
-std::vector<AdvancedButtonPress2> seqLD1B = {
-    {{23}, {}, 140, 50},   // 5
-    {{19}, {58}, 290, 65}, // alt + 2 , self force staff
-    {{20}, {}, 550, 56},   // 3
-
-};
-
-std::vector<AdvancedButtonPress2> seqLD2 = {
-    // Consider extra 20ms addition per modifier or key
-    // 10ms for clicks
-    {{23}, {}, 140, 40},       // 5
-    {{0, 201}, {56}, 300, 40}, // shift + a + left click
-
-    {{1, 200}, {56}, 500, 40}, // shift + s + right click
-    {{20}, {}, 690, 40},       // 3
-
-};
-
-std::vector<AdvancedButtonPress2> seqLD3 = {
-    {{25}, {}, 140, 50}, // 9
-                         //  {0, 56, 140, 60}, // A
-};
-
-std::vector<AdvancedButtonPress2> seqLD4 = {
-
-    {{23}, {}, 140, 40},       // 5
-    {{0, 201}, {56}, 300, 40}, // shift + a + left click
-
-    {{1, 19}, {56}, 450, 40}, // shift + s + 2
-    {{200}, {56}, 600, 40},   // shift + right click
-    {{20}, {}, 720, 40},      // 3
-
-    //  {23, 79, 140, 50},   // 5
-    //  {56, 79, 340, 450},  // shift
-    //    {0, 79, 540, 50},    // a
-    //   {201, 79, 720, 50},  // left click
-    //   {56, 79, 920, 320},  // shift
-    //    {1, 79, 1150, 60},   // s
-    //   {56, 79, 1350, 280}, // shift
-    //   {19, 79, 1550, 65},  // 2
-    //   {20, 79, 1750, 56},  // 3
-
-};
 
 std::vector<AdvancedButtonPress2> seqTest1 = {
     {{56}, {79}, 140, 320}, // shift (shift is 56)
@@ -296,13 +204,26 @@ std::vector<AdvancedButtonPress2> seqSnipe1 = {
     {{14, 1, 200}, {}, 140, 55}, // e then s then right click
 };
 
-//-------------QOP---------------
-std::vector<AdvancedButtonPress2> seqQOP1 = {
-    {{13}, {}, 140, 55},
-    {{19, 12, 14, 1}, {56}, 300, 55}, // (2, q , e , s ) all with shift
-                                      // {{13,19,12, 14, 1}, {56}, 140, 55}, // w, 2, q , e , s
+
+//-------------Tinker------------
+std::vector<AdvancedButtonPress3> seqTinker1 = {
+    {{6,201,0,201}, {}, 100, 20, 40},    // z,left click,a, left click
+    {{19, 12, 15,1}, {}, 350, 20, 70}, // 2,q,s,r
+};
+std::vector<AdvancedButtonPress3> seqTinker2 = {
+  {{6,201,0,201}, {}, 100, 20, 40},    // z,left click,a, left click
+  {{14},{58},300,20,60}, // alt + e
+    {{19, 12, 15,1}, {}, 590, 20, 120}, // 2,q,s,r
 };
 
-std::vector<AdvancedButtonPress2> seqQOP2 = {
-    {{13, 19, 3, 201, 12, 14, 1}, {56}, 140, 55}, // ( w, 2,f,left click, q , e , s ) all with shift
+std::vector<AdvancedButtonPress3> seqTinker3 = {
+    {{3, 201,6,201,0,201}, {}, 100, 20, 40},    // f(Blink),left click,z,left click,a, left click
+    {{19, 12, 15,1}, {}, 400, 20, 70}, // 2,q,s,r
 };
+std::vector<AdvancedButtonPress3> seqTinker4 = {
+    {{3, 201,6,201,0,201}, {}, 100, 20, 40},    // f(Blink),left click,z,left click,a, left click
+    {{14},{58},350,20,40}, // alt + e
+    {{19, 12, 15,1}, {}, 630, 20, 120}, // 2,q,s,r
+};
+
+

@@ -82,6 +82,7 @@ private:
   bool altKeyPressed;
   bool shiftKeyPressed;
   bool capKeyPressed;
+  bool tabKeyPressed;
 
   static void KeyboardCallback(void *context, IOReturn result, void *sender,
                                IOHIDValueRef value) {
@@ -98,6 +99,8 @@ private:
         monitor->shiftKeyPressed = pressed;
       } else if (usage == kHIDUsage_KeyboardCapsLock) {
         monitor->capKeyPressed = pressed;
+      } else if (usage == kHIDUsage_KeyboardTab) {
+        monitor->tabKeyPressed = pressed;
       }
     }
   }
@@ -128,4 +131,5 @@ public:
   bool isAltKeyPressed() const { return altKeyPressed; }
   bool isShiftKeyPressed() const { return shiftKeyPressed; }
   bool isCapsKeyPressed() const { return capKeyPressed; }
+  bool isTabKeyPressed() const { return tabKeyPressed; }
 };

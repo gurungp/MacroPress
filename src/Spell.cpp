@@ -26,9 +26,9 @@ void Spell::st_func_NotLearned(const EventData *data) {
 
 void Spell::st_func_LearnAndReady(const EventData *data) {
   // std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
-  const char *path = "/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Learning.mp3";
-  const char *path2 = "../Sounds/General/Learning.mp3";
-  m_audioPlayer.playSound(path);
+  //  const char *path = "/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Learning.mp3";
+  //  const char *path2 = "../Sounds/General/Learning.mp3";
+  // m_audioPlayer.playSound(path);
   std::cout << "--------LEARN--------" << std::endl;
   // Setting current cooldown time
   m_cooldown = m_spellCDTimes[m_spellLevel];
@@ -45,8 +45,8 @@ void Spell::st_func_LearnAndReady(const EventData *data) {
     m_spellLevel = m_spellCDTimes.size() - 1;
 }
 void Spell::st_func_Casting(const EventData *data) {
-  const char *path = "/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Casting.mp3";
-  m_audioPlayer.playSound(path);
+  // const char *path = "/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Casting.mp3";
+  //  m_audioPlayer.playSound(path);
 
   std::cout << "--------CASTING--------" << std::endl;
   std::cout << "Casting and Setting Cast time" << std::endl;
@@ -185,7 +185,7 @@ void Spell::useTalent(double seconds) {
     return;
   }
 
-  m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Talent Set.mp3");
+  //  m_audioPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/Talent Set.mp3");
   m_TalentUsed = true;
   // Now we should check if Octarine was used before using the talent
   if (m_octarine) { // if octarine was already in use , we need to re-calculate CD

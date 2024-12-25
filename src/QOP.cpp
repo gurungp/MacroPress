@@ -5,8 +5,6 @@
 #include "QOP.h"
 #include "Sequence.h"
 #include "button_key_States.h"
-#include <CoreGraphics/CGEventTypes.h>
-#include <thread>
 
 CGEventRef QueenOfPain(const InputMonitor &inputMonitor, const KeyboardMonitor &keyboardMonitor, CGEventRef &event) { // this event is the same from the
                                                                                                                       // eventCallBack of main.cpp
@@ -19,7 +17,7 @@ CGEventRef QueenOfPain(const InputMonitor &inputMonitor, const KeyboardMonitor &
     std::thread t([] {
       while (altState) { // until alt is released, don't run the sequence
       }
-      runSequence2(seqQOP1);
+      runSequence3(seqQOP1);
     });
     t.detach();
     return nullptr;
@@ -34,7 +32,7 @@ CGEventRef QueenOfPain(const InputMonitor &inputMonitor, const KeyboardMonitor &
                          // to avoid alt modifier to linger when the sequence of presses
         //  std::cout << "Alt and Right Click Pressed" << std::endl;
       }
-      runSequence2(seqQOP2);
+      runSequence3(seqQOP2);
     });
     t.detach();
   }

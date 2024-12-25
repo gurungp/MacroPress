@@ -4,20 +4,19 @@
 #include "EarthSpirit.h"
 #include "Sequence.h"
 #include "button_key_States.h"
-// Tusk
 
 CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
                        const KeyboardMonitor &keyboardMonitor,
                        CGEventRef &event) { // this event is the same from the
                                             // eventCallBack of main.cpp
-  // alt + right click
-  if (keyboardMonitor.isAltKeyPressed() && inputMonitor.isRightClicked()) {
+  // alt + q
+  if (keyboardMonitor.isAltKeyPressed() && keyStates[kVK_ANSI_Q].state) {
     std::thread t([] {
       while (altState) { // until alt is released, don't run the sequence
                          // to avoid alt modifier to linger when the sequence of presses
         //  std::cout << "Alt and Right Click Pressed" << std::endl;
       }
-      runSequence2(seqESpirit1);
+      runSequence3(ESpirit1);
     });
     t.detach();
 
@@ -39,7 +38,7 @@ CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
       while (altState) { // until alt is released, don't run the sequence
       }
 
-      runSequence2(seqESpirit2); // fetch the enemy
+      runSequence3(ESpirit2); // fetch the enemy
     });
     t.detach();
 
@@ -55,7 +54,7 @@ CGEventRef EarthSpirit(const InputMonitor &inputMonitor,
                          // to avoid alt modifier to linger when the sequence of presses
         //  std::cout << "Alt and Right Click Pressed" << std::endl;
       }
-      runSequence2(seqESpirit3);
+      runSequence3(ESpirit3);
     });
     t.detach();
   }

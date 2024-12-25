@@ -6,7 +6,7 @@ project(keyboardSim)
 set(CMAKE_CXX_STANDARD 20)  # You can set 20 for C++20 if needed
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)  # Optional: Ensures no compiler-specific extensions are used
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 
 # Find and link the required Frameworks
 find_library(SDL2_LIBRARY NAME SDL2)
@@ -36,6 +36,16 @@ add_executable(keyboardSim  ../src/main.cpp
 ../src/LoneDruid.cpp
 ../src/QOP.cpp
 ../src/Invoker.cpp
+../src/Tinker.cpp
+../src/ShadowFiend.cpp
+../src/SkyWrath.cpp
+../src/Clinkz.cpp
+../src/Enigma.cpp
+../src/Chen.cpp
+../src/Meepo.cpp
+../src/ArcWarden2.cpp
+../src/BroodMother.cpp
+../src/BrewMaster.cpp
 ../src/SSM.cpp
 ../src/Spell.cpp
 ../src/PlaySound.cpp

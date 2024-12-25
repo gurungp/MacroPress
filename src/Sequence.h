@@ -47,26 +47,16 @@ extern std::vector<AdvancedButtonPress2> seqLC3;
 // Key sequence for Tusk
 extern std::vector<AdvancedButtonPress2> seqTusk1;
 
-// Key sequence for Earth Spirit
-extern std::vector<AdvancedButtonPress2> seqESpirit1;
-extern std::vector<AdvancedButtonPress2> seqESpirit2;
-extern std::vector<AdvancedButtonPress2> seqESpirit3;
-
-// Key sequence for Lone Druid
-extern std::vector<AdvancedButtonPress2> seqLD1A;
-extern std::vector<AdvancedButtonPress2> seqLD2B;
-
-extern std::vector<AdvancedButtonPress2> seqLD2;
-extern std::vector<AdvancedButtonPress2> seqLD3;
-extern std::vector<AdvancedButtonPress2> seqLD4;
-
 // Key sequence for Sniper
 
 extern std::vector<AdvancedButtonPress2> seqSnipe1;
 
-// Key sequence for QOP
-extern std::vector<AdvancedButtonPress2> seqQOP1;
-extern std::vector<AdvancedButtonPress2> seqQOP2;
+
+// Key sequence for Tinker
+extern std::vector<AdvancedButtonPress3> seqTinker1;
+extern std::vector<AdvancedButtonPress3> seqTinker2;
+extern std::vector<AdvancedButtonPress3> seqTinker3;
+extern std::vector<AdvancedButtonPress3> seqTinker4;
 
 // test New Way of pressing
 extern std::vector<AdvancedButtonPress2> seqTest1;
