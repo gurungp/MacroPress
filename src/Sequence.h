@@ -4,12 +4,14 @@
 #include "AdvancedKeyboardSimulator.h"
 #include <vector>
 
+extern dispatch_queue_t seqQueue;
 // Function to avoid modifier key
 void avoidModifierKey(CGEventRef &event, CGEventFlags flag);
 
 // Function to run a sequence of key presses
 void runSequence2(const std::vector<AdvancedButtonPress2> &sequence);
 void runSequence3(const std::vector<AdvancedButtonPress3> &sequence);
+void runSequence4(const std::vector<AdvancedButtonPress3> &sequence, double delay = 0.0);
 
 // Generic
 extern std::vector<AdvancedButtonPress2> seqG1;
@@ -50,7 +52,6 @@ extern std::vector<AdvancedButtonPress2> seqTusk1;
 // Key sequence for Sniper
 
 extern std::vector<AdvancedButtonPress2> seqSnipe1;
-
 
 // Key sequence for Tinker
 extern std::vector<AdvancedButtonPress3> seqTinker1;

@@ -13,7 +13,6 @@
 #include <IOKit/hidsystem/IOHIDLib.h>
 #include <IOKit/hidsystem/IOLLEvent.h>
 #include <IOKit/hidsystem/event_status_driver.h>
-#include <MacTypes.h>
 #include <chrono>
 #include <cstddef>
 #include <cstring>
@@ -129,12 +128,12 @@ public:
     NXCloseEventStatus(eventSystem);
   }
 
-  static void simulateAdvancedMultiButtonPress3(const std::vector<AdvancedButtonPress3> &buttonPresses) {
+  static void simulateAdvancedMultiButtonPress3(const std::vector<AdvancedButtonPress3> &sequences) {
 
     std::vector<std::thread> threads;
 
-    for (const auto &press : buttonPresses) {
-      threads.emplace_back([press]() {
+    for (const auto &sequence : sequences) {
+      threads.emplace_back([sequence]() {
         // Initializing main Event Source
         CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
         std::vector<CGEventRef> eventsDown;
@@ -143,15 +142,15 @@ public:
         std::vector<CGEventRef> modifiersUp;
 
         // Wait before pressing
-        std::this_thread::sleep_for(std::chrono::milliseconds(press.delayBefore));
+        std::this_thread::sleep_for(std::chrono::milliseconds(sequence.delayBefore));
 
         if (source) {
-          for (CGKeyCode md : press.modifierKeys) {
+          for (CGKeyCode md : sequence.modifierKeys) {
             modifiersDown.emplace_back(CGEventCreateKeyboardEvent(source, md, true));
             modifiersUp.emplace_back(CGEventCreateKeyboardEvent(source, md, false));
           }
 
-          for (CGKeyCode key : press.keys) {
+          for (CGKeyCode key : sequence.keys) {
 
             if (key == 201) {
               CGPoint currentPos = getCurrentMousePosition();
@@ -192,7 +191,7 @@ public:
 
               CGEventPost(kCGHIDEventTap, eventsDown[i]);
 
-              std::this_thread::sleep_for(std::chrono::milliseconds(press.pressInterval));
+              std::this_thread::sleep_for(std::chrono::milliseconds(sequence.pressInterval));
 
               CGEventPost(kCGHIDEventTap, eventsUp[i]);
             }
@@ -202,7 +201,7 @@ public:
           //  }
 
           // Wait for specified time
-          std::this_thread::sleep_for(std::chrono::milliseconds(press.WaitAfterPressDuration));
+          std::this_thread::sleep_for(std::chrono::milliseconds(sequence.WaitAfterPressDuration));
 
           // Then Release modifier and event keys
           for (CGEventRef modifier : modifiersUp) {

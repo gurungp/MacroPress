@@ -2,7 +2,8 @@
 #include "InputMonitor.h"
 // #include "QOP.h" // make sure each corresponding header files has its cpp file added to the CMakeList.txt to make
 // the linker know where the implementation is for heroes or any other header/cpp files
-#include "QOP.h"
+#include "Invoker2.h"
+#include "Sequence.h"
 #include "button_key_States.h"
 #include <Carbon/Carbon.h>
 #include <CoreGraphics/CGEvent.h>
@@ -12,6 +13,7 @@
 #include <chrono>
 #include <cstddef>
 #include <ctime>
+#include <dispatch/dispatch.h>
 #include <iostream>
 #include <ostream>
 #include <thread>
@@ -120,7 +122,7 @@ void detectRightDoubleClickandAlt(int timeoutMs) {
 // particular hero this time ArcWarden or LegionCommander only
 // variable name is hero
 CGEventRef (*hero)(const InputMonitor &, const KeyboardMonitor &,
-                   CGEventRef &) = &QueenOfPain;
+                   CGEventRef &) = &Invoker;
 
 // Event CallBack Function
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
@@ -298,6 +300,7 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     UPDATE_KEY_STATE(kVK_ANSI_T, true);
     UPDATE_KEY_STATE(kVK_ANSI_F, true);
     UPDATE_KEY_STATE(kVK_ANSI_0, true);
+    UPDATE_KEY_STATE(kVK_ANSI_2, true);
     UPDATE_KEY_STATE(kVK_ANSI_3, true);
     UPDATE_KEY_STATE(kVK_ANSI_4, true);
     UPDATE_KEY_STATE(kVK_ANSI_5, true);
@@ -348,6 +351,7 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,
     UPDATE_KEY_STATE(kVK_ANSI_T, false);
     UPDATE_KEY_STATE(kVK_ANSI_F, false);
     UPDATE_KEY_STATE(kVK_ANSI_0, false);
+    UPDATE_KEY_STATE(kVK_ANSI_2, false);
     UPDATE_KEY_STATE(kVK_ANSI_3, false);
     UPDATE_KEY_STATE(kVK_ANSI_4, false);
     UPDATE_KEY_STATE(kVK_ANSI_5, false);
@@ -406,6 +410,7 @@ int main() {
   // Clean up
   CFRelease(runLoopSource);
   CFRelease(eventTap);
+  dispatch_release(seqQueue);
 
   return 0;
 }

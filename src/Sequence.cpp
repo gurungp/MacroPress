@@ -4,6 +4,7 @@
 #include <CoreGraphics/CGEventTypes.h>
 #include <dispatch/dispatch.h>
 
+dispatch_queue_t seqQueue = dispatch_queue_create("com.example.Queue", DISPATCH_QUEUE_SERIAL);
 void avoidModifierKey(CGEventRef &event, CGEventFlags flag) {
   CGEventFlags flags = CGEventGetFlags(event);
   CGEventSetType(event, kCGEventKeyUp);
@@ -18,7 +19,26 @@ void avoidModifierKey(CGEventRef &event, CGEventFlags flag) {
   // CGEventPost(kCGHIDEventTap, altKeyUp);
   // CFRelease(altKeyUp);
 }
+void asyncSleep(dispatch_queue_t queue, // The queue where task will run
+                double seconds          // How long to sleep
+) {
+  // Step 1: Add task to specified queue
+  dispatch_async(queue, ^{
+    // Step 2: Create a semaphore with initial value 0
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
 
+    // Step 3: Schedule a delayed signal
+    dispatch_after(
+        dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_MSEC),     // When to wake
+        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), // Queue for timer
+        ^{
+          dispatch_semaphore_signal(sema); // Wake up the waiting task
+        });
+
+    // Step 4: Wait for the signal
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+  });
+}
 void runSequence2(const std::vector<AdvancedButtonPress2> &sequence) {
   // Advanced Key Presses
   //
@@ -35,6 +55,21 @@ void runSequence3(const std::vector<AdvancedButtonPress3> &sequence) {
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AdvancedKeyboardSimulator::simulateAdvancedMultiButtonPress3(sequence);
       });
+}
+void runSequence4(const std::vector<AdvancedButtonPress3> &sequences, double delay) {
+  // Advanced Key Presses
+
+  // Delay Before Executing the sequence itself
+  dispatch_time_t delaytime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_MSEC);
+
+  std::cout << " Waiting for " << delay << "\n";
+  asyncSleep(seqQueue, delay);
+
+  dispatch_async(seqQueue, ^{
+    // This block is left empty intentionally as we just need the delay
+
+    AdvancedKeyboardSimulator::simulateAdvancedMultiButtonPress3(sequences);
+  });
 }
 // 200 for right click
 // 201 for left click
@@ -170,7 +205,6 @@ std::vector<AdvancedButtonPress2> seqTusk1 = {
 
 };
 
-
 std::vector<AdvancedButtonPress2> seqTest1 = {
     {{56}, {79}, 140, 320}, // shift (shift is 56)
     {{1}, {79}, 320, 60},
@@ -204,26 +238,23 @@ std::vector<AdvancedButtonPress2> seqSnipe1 = {
     {{14, 1, 200}, {}, 140, 55}, // e then s then right click
 };
 
-
 //-------------Tinker------------
 std::vector<AdvancedButtonPress3> seqTinker1 = {
-    {{6,201,0,201}, {}, 100, 20, 40},    // z,left click,a, left click
-    {{19, 12, 15,1}, {}, 350, 20, 70}, // 2,q,s,r
+    {{6, 201, 0, 201}, {}, 100, 20, 40}, // z,left click,a, left click
+    {{19, 12, 15, 1}, {}, 350, 20, 70},  // 2,q,s,r
 };
 std::vector<AdvancedButtonPress3> seqTinker2 = {
-  {{6,201,0,201}, {}, 100, 20, 40},    // z,left click,a, left click
-  {{14},{58},300,20,60}, // alt + e
-    {{19, 12, 15,1}, {}, 590, 20, 120}, // 2,q,s,r
+    {{6, 201, 0, 201}, {}, 100, 20, 40}, // z,left click,a, left click
+    {{14}, {58}, 300, 20, 60},           // alt + e
+    {{19, 12, 15, 1}, {}, 590, 20, 120}, // 2,q,s,r
 };
 
 std::vector<AdvancedButtonPress3> seqTinker3 = {
-    {{3, 201,6,201,0,201}, {}, 100, 20, 40},    // f(Blink),left click,z,left click,a, left click
-    {{19, 12, 15,1}, {}, 400, 20, 70}, // 2,q,s,r
+    {{3, 201, 6, 201, 0, 201}, {}, 100, 20, 40}, // f(Blink),left click,z,left click,a, left click
+    {{19, 12, 15, 1}, {}, 400, 20, 70},          // 2,q,s,r
 };
 std::vector<AdvancedButtonPress3> seqTinker4 = {
-    {{3, 201,6,201,0,201}, {}, 100, 20, 40},    // f(Blink),left click,z,left click,a, left click
-    {{14},{58},350,20,40}, // alt + e
-    {{19, 12, 15,1}, {}, 630, 20, 120}, // 2,q,s,r
+    {{3, 201, 6, 201, 0, 201}, {}, 100, 20, 40}, // f(Blink),left click,z,left click,a, left click
+    {{14}, {58}, 350, 20, 40},                   // alt + e
+    {{19, 12, 15, 1}, {}, 630, 20, 120},         // 2,q,s,r
 };
-
-
