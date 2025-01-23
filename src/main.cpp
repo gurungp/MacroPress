@@ -2,8 +2,8 @@
 #include "InputMonitor.h"
 // #include "QOP.h" // make sure each corresponding header files has its cpp file added to the CMakeList.txt to make
 // the linker know where the implementation is for heroes or any other header/cpp files
-#include "Invoker2.h"
 #include "Sequence.h"
+#include "BroodMother.h"
 #include "button_key_States.h"
 #include <Carbon/Carbon.h>
 #include <CoreGraphics/CGEvent.h>
@@ -122,7 +122,7 @@ void detectRightDoubleClickandAlt(int timeoutMs) {
 // particular hero this time ArcWarden or LegionCommander only
 // variable name is hero
 CGEventRef (*hero)(const InputMonitor &, const KeyboardMonitor &,
-                   CGEventRef &) = &Invoker;
+                   CGEventRef &) = &BroodMother;
 
 // Event CallBack Function
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type,

@@ -48,6 +48,11 @@ enum class SpellValues : int {
 };
 static SpellValues setTornadoDelaySpell = SpellValues::NoSpell;
 
+struct pressModerator {
+  bool pressed = false;
+  std::chrono::time_point<std::chrono::system_clock> lastPressedTime;
+};
+
 static void (*castingFunc)() = NULL;
 static void altQcasting();
 static void altQprep();
@@ -72,6 +77,11 @@ CGEventRef Invoker(const InputMonitor &inputMonitor, const KeyboardMonitor &keyb
 
 void updateSequencesTimes();
 static std::vector<AdvancedButtonPress3> seqInv4b = {};
+
+static std::vector<AdvancedButtonPress3> seqInvSelectAll = {
+    {{9}, {}, 10, 20, 50}, // v
+
+};
 
 static std::vector<AdvancedButtonPress3> seqInvPressD = {
     {{2}, {}, 10, 20, 50}, // d

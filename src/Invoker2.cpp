@@ -7,6 +7,7 @@
 #include "Sequence.h"
 #include "Spell.h"
 #include "button_key_States.h"
+#include <chrono>
 #include <cstddef>
 #include <dispatch/dispatch.h>
 
@@ -23,6 +24,14 @@ int seqInv_WaitTime;    // default global Wait time for invoke spell
 int seqInv_TornadoTime; // default global tornado wait time
 
 PlaySound soundPlayer;
+
+static pressModerator altQpress{false, std::chrono::system_clock::now()};
+static pressModerator altWpress{false, std::chrono::system_clock::now()};
+static pressModerator altEpress{false, std::chrono::system_clock::now()};
+static pressModerator altRpress{false, std::chrono::system_clock::now()};
+static pressModerator alt2press{false, std::chrono::system_clock::now()};
+static pressModerator alt3press{false, std::chrono::system_clock::now()};
+static pressModerator alt4press{false, std::chrono::system_clock::now()};
 
 // Invoker
 CGEventRef
@@ -62,15 +71,22 @@ Invoker(const InputMonitor &inputMonitor,
     // Unpress the E or any other key, to not have effect of the keypresses
     CGEventSetType(event, kCGEventKeyUp);
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
-      }
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - altEpress.lastPressedTime);
 
-      if (Quas.m_spellLevel > 0 and Wex.m_spellLevel > 0 && Exort.m_spellLevel > 0) {
-        altEprep();
-      }
-    });
-    t.detach();
+    if (duration >= std::chrono::seconds(5)) {
+
+      altEpress.lastPressedTime = std::chrono::system_clock::now();
+      dispatch_async(seqQueue, ^{
+        while (altState || keyStates[kVK_ANSI_E].state) { // until alt is released, don't run the sequence
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        if (Quas.m_spellLevel > 0 && Exort.m_spellLevel > 0 && Wex.m_spellLevel > 0) {
+          altEprep();
+        }
+      });
+    }
 
     return nullptr;
   }
@@ -95,15 +111,22 @@ Invoker(const InputMonitor &inputMonitor,
   if (keyStates[kVK_ANSI_W].state && keyboardMonitor.isAltKeyPressed()) {
     CGEventSetType(event, kCGEventKeyUp);
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
-      }
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - altWpress.lastPressedTime);
 
-      if (Quas.m_spellLevel > 0 and Wex.m_spellLevel > 0) {
-        altWprep();
-      }
-    });
-    t.detach();
+    if (duration >= std::chrono::seconds(5)) {
+
+      altWpress.lastPressedTime = std::chrono::system_clock::now();
+      dispatch_async(seqQueue, ^{
+        while (altState || keyStates[kVK_ANSI_W].state) { // until alt is released, don't run the sequence
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        if (Quas.m_spellLevel > 0 && Wex.m_spellLevel > 0) {
+          altWprep();
+        }
+      });
+    }
 
     return nullptr;
   }
@@ -111,35 +134,53 @@ Invoker(const InputMonitor &inputMonitor,
   if (keyStates[kVK_ANSI_3].state && keyboardMonitor.isAltKeyPressed()) {
     CGEventSetType(event, kCGEventKeyUp);
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
-      }
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - alt3press.lastPressedTime);
 
-      if (Quas.m_spellLevel > 0 and Wex.m_spellLevel > 0 and Exort.m_spellLevel > 0) {
-        alt3prep();
-      }
-    });
-    t.detach();
+    if (duration >= std::chrono::seconds(5)) {
+
+      alt3press.lastPressedTime = std::chrono::system_clock::now();
+      dispatch_async(seqQueue, ^{
+        while (altState || keyStates[kVK_ANSI_3].state) { // until alt is released, don't run the sequence
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        if (Quas.m_spellLevel > 0 && Exort.m_spellLevel > 0 && Wex.m_spellLevel > 0) {
+
+          alt3prep();
+        }
+      });
+    }
 
     return nullptr;
   }
 
   // TESTING NEW WAY
+
   if (keyStates[kVK_ANSI_Q].state && keyboardMonitor.isAltKeyPressed()) {
 
     // Unpress the E or any other key, to not have effect of the keypresses
     CGEventSetType(event, kCGEventKeyUp);
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
-      }
-      if (Quas.m_spellLevel > 0 && Exort.m_spellLevel > 0) {
-        if (Wex.m_spellLevel > 0) {
-          altQprep();
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - altQpress.lastPressedTime);
+
+    if (duration >= std::chrono::seconds(5)) {
+
+      altQpress.lastPressedTime = std::chrono::system_clock::now();
+      dispatch_async(seqQueue, ^{
+        while (altState || keyStates[kVK_ANSI_Q].state) { // until alt is released, don't run the sequence
         }
-      }
-    });
-    t.detach();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        if (Quas.m_spellLevel > 0 && Exort.m_spellLevel > 0) {
+          if (Wex.m_spellLevel > 0) {
+
+            altQprep();
+          }
+        }
+      });
+    }
 
     return nullptr;
   }
@@ -147,15 +188,23 @@ Invoker(const InputMonitor &inputMonitor,
   if (keyStates[kVK_ANSI_2].state && keyboardMonitor.isAltKeyPressed()) {
     CGEventSetType(event, kCGEventKeyUp);
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
-      }
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - alt2press.lastPressedTime);
 
-      if (Quas.m_spellLevel > 0 and Wex.m_spellLevel > 0) {
-        alt2prep();
-      }
-    });
-    t.detach();
+    if (duration >= std::chrono::seconds(5)) {
+
+      alt2press.lastPressedTime = std::chrono::system_clock::now();
+      dispatch_async(seqQueue, ^{
+        while (altState || keyStates[kVK_ANSI_2].state) { // until alt is released, don't run the sequence
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        if (Quas.m_spellLevel > 0 && Wex.m_spellLevel > 0) {
+
+          alt2prep();
+        }
+      });
+    }
 
     return nullptr;
   }
@@ -165,19 +214,25 @@ Invoker(const InputMonitor &inputMonitor,
 
     CGEventSetType(event, kCGEventKeyUp);
 
-    std::thread t([] {
-      while (altState) { // until alt is released, don't run the sequence
-      }
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - altRpress.lastPressedTime);
 
-      if (castingFunc != NULL) {
-        // InvokeSpell.castSpell(nullptr);
-        castingFunc();
-      } else {
-        std::cout << "Casting not set" << std::endl;
-      }
-    });
-    t.detach();
+    if (duration >= std::chrono::seconds(3)) {
 
+      altRpress.lastPressedTime = std::chrono::system_clock::now();
+      dispatch_async(seqQueue, ^{
+        while (altState) { // until alt is released, don't run the sequence
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        if (castingFunc != NULL) {
+          // InvokeSpell.castSpell(nullptr);
+          castingFunc();
+        } else {
+          std::cout << "Casting not set" << std::endl;
+        }
+      });
+    }
     return nullptr;
   }
 
@@ -188,6 +243,19 @@ Invoker(const InputMonitor &inputMonitor,
       InvokeSpell.castSpell(nullptr);
     } else
       soundPlayer.playSound("/Users/prashantgurung/Programming/keyboardSim2/Sounds/General/On Cooldown.mp3");
+    return nullptr;
+  }
+
+  // both mouse button click
+  if (inputMonitor.isRightClicked() && inputMonitor.isLeftClicked()) {
+    // Select All
+    std::thread t([] {
+      while (mouseRightState && mouseLeftState) { // until both button is released, don't run the sequence
+      }
+
+      runSequence3(seqInvSelectAll);
+    });
+    t.detach();
     return nullptr;
   }
 
@@ -278,7 +346,7 @@ void alt2prep() {
 void alt2casting() {
 
   runSequence4(seqInvPressTD);
-  runSequence4(seqInvPressR);
+  runSequence4(seqInvPressR, 60);
   runSequence4(seqInvPressD, 70);
 }
 

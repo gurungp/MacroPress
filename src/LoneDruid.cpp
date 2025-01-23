@@ -57,7 +57,7 @@ CGEventRef LoneDruid(const InputMonitor &inputMonitor, const KeyboardMonitor &ke
     return nullptr;
   }
 
-  // alt + 4
+  //
   if (keyStates[kVK_ANSI_R].state && keyboardMonitor.isAltKeyPressed()) {
 
     // Unpress the E or any other key, to not have effect of the

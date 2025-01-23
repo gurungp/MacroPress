@@ -35,7 +35,7 @@ add_executable(keyboardSim  ../src/main.cpp
 ../src/Sniper.cpp
 ../src/LoneDruid.cpp
 ../src/QOP.cpp
-../src/Invoker.cpp
+../src/Invoker2.cpp
 ../src/Tinker.cpp
 ../src/ShadowFiend.cpp
 ../src/SkyWrath.cpp
