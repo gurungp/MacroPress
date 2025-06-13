@@ -1,1 +1,1 @@
-## Custom way of executing keyboard macros and combinations 
+## User can bind certain keys or combination or keys and mouse clicks including the sequence of those combinations, that can execute keyboard macros, presses and combinations or sequence of presses with ability to time each key presses with milliseconds of delays or gaps between them
